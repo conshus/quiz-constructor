@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <title>You Don't Know Script!</title>
+</head>
+<body>
+  <h1>You Don't Know Script! Quiz</h1>
+  <div class="ydkjs-quiz flex flexcolumn hcenter vcenter"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+  <script id="ydkjs-quiz-template" type="text/x-handlebars-template">
+    <div class="question flex hcenter">
+      <div>{{inquiry}}</div>
+    </div>
+    {{#each choices}}
+    <div class="choices flex hcenter">
+      <div class="choice" id="{{this}}">{{this}}</div>
+    </div>
+    {{/each}}
+    <!--<span class="answer" id="answer-{{uniqueId}}">{{result}}</span>-->
+    <div class="flex hcenter">
+    <span class="answer" id="answer-">{{result}}</span>
+  </div>
+  </script>
+  <script type="text/javascript" src="index.js" charset="utf-8"></script>
+</body>
+</html>
