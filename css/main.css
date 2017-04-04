@@ -1,6 +1,6 @@
 html, body {
   font-family: 'Roboto', sans-serif;
-  font-size: 2vw;
+  font-size: 3vw;
 }
 .flex {
   display: flex;
@@ -25,6 +25,28 @@ html, body {
  justify-content: space-around;
  flex-wrap: wrap;
 }
-.ydkjs-quiz{
- height: 90vh;  
+.title{
+  position: fixed;
+  top: 5vh;
+  left: 2vw;
+}
+.card{
+ height: 100vh;
+}
+.answer{
+  position:fixed;
+  bottom:5vh;
+  right:2vw;
+}
+.nextQuestion{
+  position:fixed;
+  right:2vw;
+  bottom: 15vh;
+  font-size:2vw;
+}
+.previousQuestion{
+  position:fixed;
+  left:2vw;
+  bottom: 15vh;
+  font-size:2vw;
 }

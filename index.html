@@ -10,23 +10,27 @@
   <title>You Don't Know Script!</title>
 </head>
 <body>
-  <h1>You Don't Know Script! Quiz</h1>
-  <div class="ydkjs-quiz flex flexcolumn hcenter vcenter"></div>
+  <h1 class="title">You Don't Know Script! Quiz</h1>
+  <div class="ydkjs-quiz"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
   <script id="ydkjs-quiz-template" type="text/x-handlebars-template">
-    <div class="question flex hcenter">
-      <div>{{inquiry}}</div>
+    <div class="card flex flexcolumn hcenter vcenter">
+      <div class="question flex hcenter">
+        <div>{{inquiry}}</div>
+      </div>
+      {{#each choices}}
+      <div class="choices flex hcenter">
+        <div class="choice" id="{{this}}">{{this}}</div>
+      </div>
+      {{/each}}
+      <button class="nextQuestion" onclick="nextQuestion()">next question</button>
+      <button class="previousQuestion" onclick="previousQuestion()">previous question</button>
+      <!--<span class="answer" id="answer-{{uniqueId}}">{{result}}</span>-->
+      <div class="flex hcenter">
+        <span class="answer" id="answer-">{{result}}</span>
+      </div>
     </div>
-    {{#each choices}}
-    <div class="choices flex hcenter">
-      <div class="choice" id="{{this}}">{{this}}</div>
-    </div>
-    {{/each}}
-    <!--<span class="answer" id="answer-{{uniqueId}}">{{result}}</span>-->
-    <div class="flex hcenter">
-    <span class="answer" id="answer-">{{result}}</span>
-  </div>
   </script>
   <script type="text/javascript" src="index.js" charset="utf-8"></script>
 </body>
