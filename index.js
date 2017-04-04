@@ -1,24 +1,12 @@
-//let source = document.querySelector("#ydkjs-quiz-template").innerHTML;
-//let template = Handlebars.compile(source);
-//let questionsArray =[];
-//let buttonsArray=[];
 function Question (inquiry, choices, answer){
   this.inquiry = inquiry;
   this.uniqueId = this.inquiry.slice(0,this.inquiry.length-1).split(" ").join("");
   this.choices = choices;
   this.answer = answer;
-  //this.result = "";
   this.isCorrect = function(event){
     let correctAnswer = "";
     console.log(event.target.textContent);
-    /*for (i=0;i<questionsArray.length;i++){
-      if(buttonsArray[i].indexOf(event.target.id) != -1){
-        correctAnswer = questionsArray[i].answer;
-      }
-    }*/
     console.log(this.answer);
-    //if (event.target.id == correctAnswer){
-    //if (event.target.id == this.answer){
     if (event.target.textContent === this.answer){
       this.result = "Correct!";
       event.target.style.backgroundColor ="green";
@@ -29,68 +17,14 @@ function Question (inquiry, choices, answer){
     }
     let result = document.querySelector("#answer-");
     result.innerHTML = this.result;
-/*
-    let quizChoices = document.querySelectorAll(".choice");
-    for (i=0; i<quizChoices.length; i++){
-      let quizChoice = quizChoices[i];
-
-      var clone = quizChoice.cloneNode();
-  while (quizChoice.firstChild) {
-    clone.appendChild(quizChoice.lastChild);
-  }
-  quizChoice.parentNode.replaceChild(clone, quizChoice);
-}*/
-/*    let quizChoices = document.querySelectorAll(".choice");
-    for (i=0; i<quizChoices.length; i++){
-      let quizChoice = quizChoices[i];
-      quizChoice.addEventListener("click","");
-      console.log("removeEventListener")
-    }*/
   };
   this.display = function(){
-    /*questionsArray = [
-      question1,
-      question2,
-      question3,
-      question4,
-      question5
-    ];*/
-    //let html = questionsArray.map(object => template(object)).join("");
     let source = document.querySelector("#ydkjs-quiz-template").innerHTML;
     let template = Handlebars.compile(source);
-
     let html = template(this);
     document.querySelector(".ydkjs-quiz").insertAdjacentHTML('beforeend',html);
     document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
     console.log(document.querySelector('.ydkjs-quiz .card:last-of-type ul'))
-    //let destination = document.querySelector(".ydkjs-quiz");
-    //destination.innerHTML = html;
-    //console.log(this.uniqueId);
-    //let quizChoice = document.querySelector("#WhendidJavaScriptfirstappear");
-    //let quizChoice = document.querySelector(".choices");
-    //quizChoice.addEventListener("click",this.isCorrect.bind(this));
-  /*  let quizChoices = document.querySelectorAll(".choice");
-    for (i=0; i<quizChoices.length; i++){
-      let quizChoice = quizChoices[i];
-      quizChoice.addEventListener("click",this.isCorrect.bind(this));
-    }*/
-    /*//old way of getting click events start
-    let quizChoices = document.querySelectorAll(".choice");
-    let buttonSet =[];
-    let buttonsPerQuestion = quizChoices.length / questionsArray.length;
-    for (i=0; i<questionsArray.length; i++){
-      for (j=0; j<buttonsPerQuestion; j++){
-         buttonSet[j] = quizChoices[j+(4*i)].id;
-      }
-      buttonsArray.push(buttonSet);
-      buttonSet=[];
-    }
-    for (i=0; i<quizChoices.length; i++){
-      let quizChoice = quizChoices[i];
-      quizChoice.addEventListener("click",this.isCorrect.bind(this));
-    }
-    // old way of getting click events end*/
-
   }
 }
 let question1 = new Question (
@@ -144,8 +78,6 @@ let question5 = new Question (
 "Netscape Navigator"
 );
 [question1, question2, question3, question4, question5].forEach(question => question.display());
-
-//question5.display();
 function nextQuestion(){
   window.scrollBy(0,800);
   let result = document.querySelector("#answer-");
