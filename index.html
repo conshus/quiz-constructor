@@ -19,11 +19,18 @@
       <div class="question flex hcenter">
         <div>{{inquiry}}</div>
       </div>
-      {{#each choices}}
-      <div class="choices flex hcenter">
-        <div class="choice" id="{{this}}">{{this}}</div>
-      </div>
-      {{/each}}
+      <article>
+      <ul>
+        {{#each choices}}
+        <li class="flex hcenter">{{this}}</li>
+        {{/each}}
+      </ul>
+  </article>
+<!--      <div class="choices" id="{{uniqueId}}">
+        {{#each choices}}
+        <div class="choice flex hcenter" id="{{this}}">{{this}}</div>
+        {{/each}}
+      </div> -->
       <button class="nextQuestion" onclick="nextQuestion()">next question</button>
       <button class="previousQuestion" onclick="previousQuestion()">previous question</button>
       <!--<span class="answer" id="answer-{{uniqueId}}">{{result}}</span>-->
