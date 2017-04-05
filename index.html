@@ -19,12 +19,19 @@
         <div>{{inquiry}}</div>
       </div>
       <article>
+        {{#if choices}}
         <ul>
           {{#each choices}}
           <li class="flex hcenter">{{this}}</li>
           {{/each}}
         </ul>
       </article>
+      {{/if}}
+      {{#if fillIn}}
+      <div class="question flex hcenter">
+        <div><input type="text" id="shortAnswerResponse"></input><button class="submitButton">Answer</button></div>
+      </div>
+      {{/if}}
       <button class="nextQuestion" onclick="nextQuestion()">next question</button>
       <button class="previousQuestion" onclick="previousQuestion()">previous question</button>
       <div class="flex hcenter">

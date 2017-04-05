@@ -51,3 +51,9 @@ html, body {
   bottom: 15vh;
   font-size:2vw;
 }
+input {
+  font-size: 3vw;
+}
+button {
+  font-size: 3vw;
+}
