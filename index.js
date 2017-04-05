@@ -1,7 +1,6 @@
 function Question (inquiry, answer){
   this.inquiry = inquiry;
   this.uniqueId = this.inquiry.slice(0,this.inquiry.length-1).split(" ").join("");
-  //this.choices = choices;
   this.answer = answer;
 }
 function MultipleChoiceQuestion(inquiry, choices, answer){
@@ -13,18 +12,13 @@ MultipleChoiceQuestion.prototype.display = function(){
   let template = Handlebars.compile(source);
   let html = template(this);
   document.querySelector(".ydkjs-quiz").insertAdjacentHTML('beforeend',html);
-  //console.log(this);
-    document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
-    //console.log(document.querySelector('.ydkjs-quiz .card:last-of-type ul'))
+  document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
 };
 MultipleChoiceQuestion.prototype.isCorrect = function(event){
   let correctAnswer = "";
-  console.log(event.target.textContent);
-  console.log(this.answer);
   if (event.target.textContent === this.answer){
     this.result = "Correct!";
     event.target.style.backgroundColor ="green";
-
   } else {
     this.result = "No sorry!";
     event.target.style.backgroundColor ="red";
@@ -41,16 +35,11 @@ ShortAnswerQuestion.prototype.display = function(){
   let template = Handlebars.compile(source);
   let html = template(this);
   document.querySelector(".ydkjs-quiz").insertAdjacentHTML('beforeend',html);
-  //console.log(this);
-    document.querySelector('.ydkjs-quiz .card:last-of-type .submitButton').addEventListener('click', this.isCorrect.bind(this));
-    //console.log(document.querySelector('.submitButton'));
+  document.querySelector('.ydkjs-quiz .card:last-of-type .submitButton').addEventListener('click', this.isCorrect.bind(this));
 };
 ShortAnswerQuestion.prototype.isCorrect = function(event){
   let correctAnswer = "";
-  console.log(event.target.previousElementSibling.value);
-  console.log(this.answer);
-  console.log(document.querySelector("#shortAnswerResponse"));
-  if (event.target.previousElementSibling.value === this.answer){
+  if (event.target.previousElementSibling.value.toLowerCase() === this.answer.toLowerCase()){
     this.result = "Correct!";
     event.target.style.backgroundColor ="green";
 
@@ -61,6 +50,7 @@ ShortAnswerQuestion.prototype.isCorrect = function(event){
   let result = document.querySelector("#answer-");
   result.innerHTML = this.result;
 };
+
 //Questions
 let question1 = new MultipleChoiceQuestion (
   "JavaScript is a trademark of which company?",
@@ -127,8 +117,13 @@ let question8 = new ShortAnswerQuestion (
   "fillIn",
 "querySelectorAll"
 );
-[question1, question2, question3, question4, question5].forEach(question => question.display());
-[question6, question7, question8].forEach(question => question.display());
+
+//Randomize questions
+let questionsArray = [question1, question2, question3, question4, question5, question6, question7, question8];
+questionsArray.sort(function(a, b){return 0.5 - Math.random()});
+questionsArray.forEach(question => question.display());
+
+//Go to the previous or next question
 function nextQuestion(){
   window.scrollBy(0,800);
   let result = document.querySelector("#answer-");
