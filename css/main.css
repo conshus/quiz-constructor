@@ -57,3 +57,11 @@ input {
 button {
   font-size: 3vw;
 }
+#scoreHolder{
+  position: fixed;
+  right: 2vw;
+  top: 5vw;
+}
+.answered{
+  pointer-events: none;
+}

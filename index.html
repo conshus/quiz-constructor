@@ -12,17 +12,18 @@
 <body>
   <h1 class="title">You Don't Know Script! Quiz</h1>
   <div class="ydkjs-quiz"></div>
+  <div id="scoreHolder">Score: <span id="score">0</span></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
   <script id="ydkjs-quiz-template" type="text/x-handlebars-template">
     <div class="card flex flexcolumn hcenter vcenter">
       <div class="question flex hcenter">
-        <div>{{inquiry}}</div>
+        <div>{{{inquiry}}}</div>
       </div>
       <article>
         {{#if choices}}
         <ul>
           {{#each choices}}
-          <li class="flex hcenter">{{this}}</li>
+          <li class="flex hcenter">{{{this}}}</li>
           {{/each}}
         </ul>
       </article>
