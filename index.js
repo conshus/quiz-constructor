@@ -197,9 +197,13 @@ function getApiInfo(category,type){
   .then(displayQuestions)
   //.then(combineQuestions)
 }
-
 getApiInfo(31,"multiple");
-getApiInfo(31,"boolean")
+getApiInfo(31,"boolean");
+
+function getQuestions(){
+//getApiInfo(31,"multiple");
+//getApiInfo(31,"boolean");
+}
 //.then(object => console.log(object));
 /*getApiInfo(31,"multiple")
   .then(getApiInfo(31,"boolean"))
