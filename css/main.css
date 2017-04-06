@@ -51,17 +51,28 @@ html, body {
   bottom: 15vh;
   font-size:2vw;
 }
-input {
+input{
   font-size: 3vw;
 }
-button {
+button{
   font-size: 3vw;
 }
 #scoreHolder{
   position: fixed;
   right: 2vw;
-  top: 5vw;
+  top: 5vh;
 }
 .answered{
   pointer-events: none;
+}
+#username{
+  position: fixed;
+  right: 20vw;
+  top: 5vh;
+}
+#submitScore{
+  position:fixed;
+  left:50vw;
+  bottom: 15vh;
+  font-size:2vw;
 }

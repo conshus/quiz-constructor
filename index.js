@@ -1,24 +1,28 @@
 let score = 0;
+let scorecard = {};
+scorecard.correct =[];
 function Question (inquiry, answer){
   this.inquiry = inquiry;
   this.uniqueId = this.inquiry.slice(0,this.inquiry.length-1).split(" ").join("");
   this.answer = answer;
 }
 
-Question.prototype.insertTemplate = function(){
+Question.prototype.insertTemplate = function(eventElement){
   let source = document.querySelector("#ydkjs-quiz-template").innerHTML;
   let template = Handlebars.compile(source);
   let html = template(this);
   document.querySelector(".ydkjs-quiz").insertAdjacentHTML('beforeend',html);
+  document.querySelector(eventElement).addEventListener('click', this.isCorrect.bind(this));
 
 }
 
-Question.prototype.correctTemplate = function(guess, answer){
+Question.prototype.correctTemplate = function(guess, answer, inquiry){
   let correctAnswer = "";
   if (guess === answer){
     this.result = "Correct!";
     event.target.style.backgroundColor ="green";
     score += 10;
+    scorecard.correct.push({question: inquiry});
   } else {
     this.result = "No sorry!";
     event.target.style.backgroundColor ="red";
@@ -74,11 +78,11 @@ function ApiQuestion(inquiry, choices, answer){
 ApiQuestion.prototype = Object.create(Question.prototype);
 
 ApiQuestion.prototype.display = function(){
-  this.insertTemplate();
-  document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
+  this.insertTemplate('.ydkjs-quiz .card:last-of-type ul');
+  //document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
 };
 ApiQuestion.prototype.isCorrect = function(event){
-this.correctTemplate(event.target.textContent, this.answer);
+this.correctTemplate(event.target.textContent, this.answer, this.inquiry);
 };
 
 //Questions
@@ -183,7 +187,7 @@ function combineQuestions(questionsArray){
   totalApiQuestions.push(questionsArray);
 }
 function getApiInfo(category,type){
-  console.log(type);
+  //console.log(type);
 
   return fetch("https://opentdb.com/api.php?amount=5&category="+category+"&type="+type)
   .then(response => response.json())
@@ -206,3 +210,23 @@ getApiInfo(31,"boolean")
   console.log(totalApiQuestions);
 //.then(object => console.log(object));
 */
+
+function submitQuiz(){
+  let url = "http://putsreq.com/4DNdWqfDVjabX5RriVvV";
+  function sendScorecard (data){
+    return {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+  }
+  scorecard.username = document.getElementById("username").value;
+  scorecard.score = score;
+  scorecard.questionsAsked = totalApiQuestions;
+  fetch(url, sendScorecard(scorecard))
+    .then(response => response.json())
+    .then(responseData => console.log(responseData))
+}

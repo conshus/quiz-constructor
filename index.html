@@ -13,6 +13,9 @@
   <h1 class="title">You Don't Know Script! Quiz</h1>
   <div class="ydkjs-quiz"></div>
   <div id="scoreHolder">Score: <span id="score">0</span></div>
+  <div id="quizIntro">
+    <input type="text" id="username" placeholder="Please enter your name"></input>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
   <script id="ydkjs-quiz-template" type="text/x-handlebars-template">
     <div class="card flex flexcolumn hcenter vcenter">
@@ -35,6 +38,7 @@
       {{/if}}
       <button class="nextQuestion" onclick="nextQuestion()">next question</button>
       <button class="previousQuestion" onclick="previousQuestion()">previous question</button>
+      <button id="submitScore" onclick="submitQuiz()">Submit Quiz</button>
       <div class="flex hcenter">
         <span class="answer" id="answer-">{{result}}</span>
       </div>
