@@ -13,7 +13,6 @@ Question.prototype.insertTemplate = function(eventElement){
   let html = template(this);
   document.querySelector(".ydkjs-quiz").insertAdjacentHTML('beforeend',html);
   document.querySelector(eventElement).addEventListener('click', this.isCorrect.bind(this));
-
 }
 
 Question.prototype.correctTemplate = function(guess, answer, inquiry){
@@ -30,7 +29,6 @@ Question.prototype.correctTemplate = function(guess, answer, inquiry){
   }
   let result = document.querySelector("#answer-");
   result.innerHTML = this.result;
-  //console.log(score);
   let runningScore = document.querySelector("#score");
   runningScore.innerHTML = score;
   if (score < 0){
@@ -41,32 +39,36 @@ Question.prototype.correctTemplate = function(guess, answer, inquiry){
     runningScore.style.color = "black";
   }
   event.target.parentElement.classList.add("answered")
-
 }
 
 function MultipleChoiceQuestion(inquiry, choices, answer){
   Question.call(this, inquiry, answer);
   this.choices = choices;
 }
+
 MultipleChoiceQuestion.prototype = Object.create(Question.prototype);
 
 MultipleChoiceQuestion.prototype.display = function(){
   this.insertTemplate();
   document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
 };
+
 MultipleChoiceQuestion.prototype.isCorrect = function(event){
   this.correctTemplate(event.target.textContent, this.answer);
 };
+
 ShortAnswerQuestion.prototype = Object.create(Question.prototype);
 
 function ShortAnswerQuestion(inquiry, fillIn, answer){
   Question.call(this, inquiry, answer);
   this.fillIn = fillIn;
 }
+
 ShortAnswerQuestion.prototype.display = function(){
   this.insertTemplate();
   document.querySelector('.ydkjs-quiz .card:last-of-type .submitButton').addEventListener('click', this.isCorrect.bind(this));
 };
+
 ShortAnswerQuestion.prototype.isCorrect = function(event){
   this.correctTemplate(event.target.previousElementSibling.value.toLowerCase(), this.answer.toLowerCase());
 };
@@ -75,11 +77,11 @@ function ApiQuestion(inquiry, choices, answer){
   Question.call(this, inquiry, answer);
   this.choices = choices;
 }
+
 ApiQuestion.prototype = Object.create(Question.prototype);
 
 ApiQuestion.prototype.display = function(){
   this.insertTemplate('.ydkjs-quiz .card:last-of-type ul');
-  //document.querySelector('.ydkjs-quiz .card:last-of-type ul').addEventListener('click', this.isCorrect.bind(this));
 };
 ApiQuestion.prototype.isCorrect = function(event){
 this.correctTemplate(event.target.textContent, this.answer, this.inquiry);
@@ -176,9 +178,6 @@ function formatQuestions(questionsObject){
   return new ApiQuestion(questionsObject.question, questionsObject.incorrect_answers, questionsObject.correct_answer);
 }
 function displayQuestions(questionsArray){
-  //console.log(totalApiQuestions);
-  //totalApiQuestions.sort(function(a, b){return 0.5 - Math.random()});
-  //totalApiQuestions.forEach(question => question.display());
   questionsArray.sort(function(a, b){return 0.5 - Math.random()});
   questionsArray.forEach(question => question.display());
 }
@@ -187,35 +186,17 @@ function combineQuestions(questionsArray){
   totalApiQuestions.push(questionsArray);
 }
 function getApiInfo(category,type){
-  //console.log(type);
-
   return fetch("https://opentdb.com/api.php?amount=5&category="+category+"&type="+type)
   .then(response => response.json())
   .then(object => object.results.map(formatQuestions))
-  //.then(object => console.log(object));
-  //.then(object => totalApiQuestions.concat(object))
   .then(displayQuestions)
-  //.then(combineQuestions)
 }
-//getApiInfo(31,"multiple");
-//getApiInfo(31,"boolean");
 
 function getQuestions(){
-  console.log("got questions", document.getElementById("quizSelect").value);
   document.getElementById("quizSelect").style.display = "none";
   getApiInfo(document.getElementById("quizSelect").value,"multiple");
   getApiInfo(document.getElementById("quizSelect").value,"boolean");
 }
-//.then(object => console.log(object));
-/*getApiInfo(31,"multiple")
-  .then(getApiInfo(31,"boolean"))
-  //.then(moviePromises => Promise.all(moviePromises))
-
-  .then(object => console.log(object));
-  //.then(displayQuestions)
-  console.log(totalApiQuestions);
-//.then(object => console.log(object));
-*/
 
 function submitQuiz(){
   let url = "http://putsreq.com/4DNdWqfDVjabX5RriVvV";
