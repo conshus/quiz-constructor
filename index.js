@@ -188,7 +188,7 @@ function combineQuestions(questionsArray){
 function getApiInfo(category,type){
   return fetch("https://opentdb.com/api.php?amount=5&category="+category+"&type="+type)
   .then(response => response.json())
-  .then(object => object.results.map(formatQuestions))
+  .then(array => array.results.map(formatQuestions))
   .then(displayQuestions)
 }
 
