@@ -197,12 +197,14 @@ function getApiInfo(category,type){
   .then(displayQuestions)
   //.then(combineQuestions)
 }
-getApiInfo(31,"multiple");
-getApiInfo(31,"boolean");
-
-function getQuestions(){
 //getApiInfo(31,"multiple");
 //getApiInfo(31,"boolean");
+
+function getQuestions(){
+  console.log("got questions", document.getElementById("quizSelect").value);
+  document.getElementById("quizSelect").style.display = "none";
+  getApiInfo(document.getElementById("quizSelect").value,"multiple");
+  getApiInfo(document.getElementById("quizSelect").value,"boolean");
 }
 //.then(object => console.log(object));
 /*getApiInfo(31,"multiple")

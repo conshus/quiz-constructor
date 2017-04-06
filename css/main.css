@@ -76,3 +76,9 @@ button{
   bottom: 15vh;
   font-size:2vw;
 }
+#quizSelect{
+  position: absolute;
+  left:33vw;
+  top:50vh;
+  font-size: 2vw;
+}
